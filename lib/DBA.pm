@@ -4,57 +4,59 @@ use 5.008003;
 use strict;
 use warnings;
 
-require Exporter;
+our $VERSION = '0.02';
 
-our @ISA = qw(Exporter);
-
-# Items to export into callers namespace by default. Note: do not export
-# names by default without a very good reason. Use EXPORT_OK instead.
-# Do not simply export all your public functions/methods/constants.
-
-# This allows declaration	use DBA ':all';
-# If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
-# will save memory.
-our %EXPORT_TAGS = ( 'all' => [ qw(
-	
-) ] );
-
-our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
-
-our @EXPORT = qw(
-	
-);
-
-our $VERSION = '0.01';
-
-
-# Preloaded methods go here.
 
 1;
-__END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-DBA - Perl extension for blah blah blah
+DBA - This module is just a placeholder on the top level DBA namespace.
 
 =head1 SYNOPSIS
 
-  use DBA;
-  blah blah blah
+Do not use this module directly. It currently does absolutely nothing. I don't
+expect it will do anything any time soon either.
 
 =head1 DESCRIPTION
 
-Stub documentation for DBA, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+This module is here only as a place holder and to describe the intended purpose
+of modules that should be found under it. It may some day provide some extremely
+basic methods, config handling or such that it turns out are common to most
+projects under it, but it's unlikely there will be much in common.
 
-Blah blah blah.
+This name space root was decided on as a result of discussions on the
+module-authors mailing list at perl.org E<lt>module-authors@perl.orgE<gt>
+regarding my MySQL backup project originally proposed as MySQL::Backup.
+(http://www.nntp.perl.org/group/perl.module-authors/2964)
 
-=head2 EXPORT
+There was moderate interest in the module on concept. A few people were
+interested in seeing the module become a base package for backing up other
+RDBMS types as well. After a little thinking I concluded this was something I
+could reasonably achieve, and so I suggested the DBA top name space with my
+project falling under DBA::Backup. Tim Bunce responded (excerpted):
 
-None by default.
+"... a DBA namespace sounds reasonable as a home for cross-database
+DBA support modules. I'd recommend a structure like this:
 
+  DBA::<activity>                           -- front-end module
+  DBA::<activity>::*                        -- support modules
+  DBA::<activity>::Plugin::<databasename>   -- back-end modules
+
+...
+
+You'll either end up with a lowest-common-denominator approach that
+has too little functionality, or have so many database-specific
+flags an options and whatnot that there's little benefit in having
+a "common API".
+
+Having said that, I'd be happy to see this happen if it did :)"
+
+So here it is. I decided not to bother with ::Plugin portion, at least in the
+Backup project, since all activities
+in this area will require RDBMS specific drivers and, unlike DBI drivers, they
+will not be in a separate namespace. Have fun, and I hope you find something
+useful in here!
 
 =head1 HISTORY
 
@@ -62,34 +64,26 @@ None by default.
 
 =item 0.01
 
-Original version; created by h2xs 1.23 with options
+Original version, just documentation.
 
-  -AXC
-	-n
-	DBA
+=item 0.02
+
+Added mailing list information.
 
 =back
 
-
-
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+The mailing list for the DBA modules is perl-dba@fini.net. See
+http://lists.fini.net/mailman/listinfo/perl-dba to subscribe.
 
 =head1 AUTHOR
 
-Sean P. Quinlan, E<lt>seanq@suse.deE<gt>
+Sean Quinlan, E<lt>gilant@gmail.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2004 by Sean P. Quinlan
+Copyright (C) 2004 by Sean Quinlan
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.3 or,
